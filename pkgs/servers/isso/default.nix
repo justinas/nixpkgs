@@ -13,7 +13,7 @@ let
   nodeDependencies = (nodePackages.shell.override (old: {
   })).nodeDependencies;
 in
-with python3Packages; buildPythonApplication rec {
+with python3Packages; buildPythonPackage rec {
 
   pname = "isso";
   version = "0.12.5";

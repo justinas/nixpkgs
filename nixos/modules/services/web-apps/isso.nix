@@ -11,13 +11,34 @@ in {
 
   options = {
     services.isso = {
+      address = mkOption {
+        description = ''
+          The address for isso server to listen on
+        '';
+        default = "localhost";
+        type = types.str;
+      };
+
       enable = mkEnableOption ''
         A commenting server similar to Disqus.
-
-        Note: The application's author suppose to run isso behind a reverse proxy.
-        The embedded solution offered by NixOS is also only suitable for small installations
-        below 20 requests per second.
       '';
+
+      gunicorn.workers = mkOption {
+        type = types.ints.positive;
+        default = 3;
+        example = 10;
+        description = ''
+          The number of worker processes for handling requests.
+        '';
+      };
+
+      port = mkOption {
+        description = ''
+          The port for isso server to listen on
+        '';
+        default = 8080;
+        type = types.port;
+      };
 
       settings = mkOption {
         description = ''
@@ -34,7 +55,7 @@ in {
         example = literalExample ''
           {
             general = {
-              host = "http://localhost";
+              "max-age" = "15m";
             };
           }
         '';
@@ -49,6 +70,10 @@ in {
       description = "isso, a commenting server similar to Disqus";
       wantedBy = [ "multi-user.target" ];
 
+      environment = {
+        ISSO_SETTINGS = configFile;
+      };
+
       serviceConfig = {
         User = "isso";
         Group = "isso";
@@ -57,9 +82,14 @@ in {
 
         StateDirectory = "isso";
 
-        ExecStart = ''
-          ${pkgs.isso}/bin/isso -c ${configFile}
-        '';
+        ExecStart =
+          let
+            bindAddr = "${cfg.address}:${toString cfg.port}";
+            python = pkgs.python3.withPackages (ps: [ pkgs.isso ps.gunicorn ]);
+          in
+          ''
+            ${python}/bin/python -m gunicorn -b ${bindAddr} --preload -w ${toString cfg.gunicorn.workers} isso.run
+          '';
 
         Restart = "on-failure";
         RestartSec = 1;

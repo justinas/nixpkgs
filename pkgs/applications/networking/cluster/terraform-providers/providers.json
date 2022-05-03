@@ -1,12 +1,12 @@
 {
   "aci": {
-    "owner": "CiscoDevNet",
+    "owner": null,
     "provider-source-address": "registry.terraform.io/CiscoDevNet/aci",
-    "repo": "terraform-provider-aci",
-    "rev": "v2.1.0",
+    "repo": null,
+    "rev": null,
     "sha256": "sha256-7fOvTEinJUpSaCnlP+191VTSEpE4z11+HUcH2iTFj60=",
     "vendorSha256": null,
-    "version": "2.1.0"
+    "version": "2.3.0"
   },
   "acme": {
     "owner": "vancluever",

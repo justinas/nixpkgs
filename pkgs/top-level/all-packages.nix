@@ -5482,6 +5482,8 @@ with pkgs;
 
   tracker-miners = callPackage ../development/libraries/tracker-miners { };
 
+  trackma = libsForQt5.callPackage ../applications/misc/trackma { };
+
   tracy = callPackage ../development/tools/tracy {
     inherit (darwin.apple_sdk.frameworks) Carbon AppKit;
   };

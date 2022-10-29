@@ -16071,6 +16071,8 @@ with pkgs;
 
   ameba = callPackage ../development/tools/ameba { };
 
+  aml-flash-tool = callPackage ../development/tools/misc/aml-flash-tool { };
+
   anybadge = with python3Packages; toPythonApplication anybadge;
 
   apkg = callPackage ../tools/package-management/apkg { };

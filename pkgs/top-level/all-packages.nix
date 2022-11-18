@@ -23404,6 +23404,8 @@ with pkgs;
 
   alerta-server = callPackage ../servers/monitoring/alerta { };
 
+  alertmanager-discord = callPackage ../servers/monitoring/alertmanager-discord/default.nix { };
+
   alps = callPackage ../servers/alps { };
 
   apache-directory-server = callPackage ../servers/ldap/apache-directory-server {};

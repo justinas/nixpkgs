@@ -30,4 +30,6 @@ rustPlatform.buildRustPackage {
     license = licenses.mit;
     maintainers = with maintainers; [ justinas ];
   };
+
+  passthru.tests = nixosTests.agnos;
 }

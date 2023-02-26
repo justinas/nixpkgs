@@ -1567,6 +1567,10 @@ with pkgs;
 
   agi = callPackage ../tools/graphics/agi { };
 
+  agnos = callPackage ../tools/admin/agnos {
+    inherit (darwin.apple_sdk.frameworks) Security;
+  };
+
   agola = callPackage ../development/tools/continuous-integration/agola { };
 
   agrep = callPackage ../tools/text/agrep { };

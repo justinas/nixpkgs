@@ -494,6 +494,7 @@ in {
   nzbget = handleTest ./nzbget.nix {};
   nzbhydra2 = handleTest ./nzbhydra2.nix {};
   oh-my-zsh = handleTest ./oh-my-zsh.nix {};
+  omada = handleTest ./omada.nix {};
   ombi = handleTest ./ombi.nix {};
   openarena = handleTest ./openarena.nix {};
   openldap = handleTest ./openldap.nix {};

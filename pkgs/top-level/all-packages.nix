@@ -25400,6 +25400,10 @@ with pkgs;
     tpmSupport = true;
   };
 
+  omada-controller = callPackage ../servers/omada-controller {
+    mongodb = mongodb-4_2;
+  };
+
   ops = callPackage ../applications/virtualization/ops { };
 
   seabios = callPackage ../applications/virtualization/seabios { };

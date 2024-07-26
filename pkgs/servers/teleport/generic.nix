@@ -22,12 +22,15 @@
 , fixup-yarn-lock
 , nixosTests
 
+  # withFido enables FIDO authenticator support in the tsh client.
+  # This flag is not necessary to support WebAuthn in the Teleport *server*.
+, withFido ? stdenv.hostPlatform.parsed.cpu.bits >= 64
 , withRdpClient ? true
 
 , version
 , hash
 , vendorHash
-, extPatches ? []
+, extPatches ? [ ]
 , cargoHash ? null
 , cargoLock ? null
 , yarnHash
@@ -126,10 +129,12 @@ buildGoModule rec {
   proxyVendor = true;
 
   subPackages = [ "tool/tbot" "tool/tctl" "tool/teleport" "tool/tsh" ];
-  tags = [ "libfido2" "webassets_embed" ]
+  tags = [ "webassets_embed" ]
+    ++ lib.optional withFido "libfido2"
     ++ lib.optional withRdpClient "desktop_access_rdp";
 
-  buildInputs = [ openssl libfido2 ]
+  buildInputs = [ openssl ]
+    ++ lib.optional withFido libfido2
     ++ lib.optionals (stdenv.isDarwin && withRdpClient) [ CoreFoundation Security AppKit ];
   nativeBuildInputs = [ makeWrapper pkg-config ];
 
@@ -181,7 +186,7 @@ buildGoModule rec {
     platforms = platforms.unix;
     # go-libfido2 is broken on platforms with less than 64-bit because it defines an array
     # which occupies more than 31 bits of address space.
-    broken = stdenv.hostPlatform.parsed.cpu.bits < 64 ||
+    broken = (stdenv.hostPlatform.parsed.cpu.bits < 64 && withFido) ||
       # See comment about wasm32-unknown-unknown in rustc.nix.
       # version 15 is the first that starts to use wasm
       (lib.versionAtLeast version "15") && (

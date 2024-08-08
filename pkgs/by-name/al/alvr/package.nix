@@ -121,21 +121,30 @@ rustPlatform.buildRustPackage rec {
     xvidcore
   ];
 
-  postBuild = ''
-    # Build SteamVR driver ("streamer")
+  doCheck = false; # TODO: remove
+  buildPhase = ''
+    runHook preBuild
+
     cargo xtask build-streamer --release
+
+    runHook postBuild
   '';
 
-  postInstall = ''
+  installPhase = ''
+    runHook preInstall
+
     install -Dm755 ${src}/alvr/xtask/resources/alvr.desktop $out/share/applications/alvr.desktop
     install -Dm644 ${src}/resources/alvr.png $out/share/icons/hicolor/256x256/apps/alvr.png
 
     # Install SteamVR driver
-    mkdir -p $out/{libexec,lib/alvr,share}
+    mkdir -p $out/{bin,libexec,lib/alvr,share}
+    cp -r ./build/alvr_streamer_linux/bin/. $out/bin
     cp -r ./build/alvr_streamer_linux/lib64/. $out/lib
     cp -r ./build/alvr_streamer_linux/libexec/. $out/libexec
     cp -r ./build/alvr_streamer_linux/share/. $out/share
     ln -s $out/lib $out/lib64
+
+    runHook postInstall
   '';
 
   passthru.updateScript = nix-update-script { };

@@ -1147,6 +1147,15 @@
     "spdx": "MPL-2.0",
     "vendorHash": "sha256-6M6jTrukO0VhyZRdYbbICm22upbGyOkUSuHqMLTPcEM="
   },
+  "rixlhq_netcup": {
+    "hash": "sha256-o7vuDGGJj/9OUkUUP0tjWYqXFPI33wc4YtN+QqKHwEM=",
+    "homepage": "https://registry.terraform.io/providers/rixlhq/netcup",
+    "owner": "rixlhq",
+    "repo": "terraform-provider-netcup",
+    "rev": "v1.2.1",
+    "spdx": "MIT",
+    "vendorHash": "sha256-7aLlLsr8M/k2E9TeHM+vk84PqsTwE5QfrtKW/dUIrsQ="
+  },
   "rootlyhq_rootly": {
     "hash": "sha256-sWCG6mD7fYi2Yon5Wu/54+m+T8KcUYd38yDt8M3LS+E=",
     "homepage": "https://registry.terraform.io/providers/rootlyhq/rootly",

@@ -795,6 +795,15 @@
     "spdx": "Apache-2.0",
     "vendorHash": "sha256-mnKXYT0GfIS+ODzBCS9l4rLF1ugadesmpgdOgj74nLg="
   },
+  "jianyuan_porkbun": {
+    "hash": "sha256-fG1JMKeqGyOqI0Yr2uQwsnUitIcuz6wm7JFc2IXzFTA=",
+    "homepage": "https://registry.terraform.io/providers/jianyuan/porkbun",
+    "owner": "jianyuan",
+    "repo": "terraform-provider-porkbun",
+    "rev": "v0.3.3",
+    "spdx": "MIT",
+    "vendorHash": "sha256-eIieKGy20E1ITbBQdsN8xoAh4cmytAdjdwKzu3s0Hg0="
+  },
   "jianyuan_sentry": {
     "hash": "sha256-Mths66WPu6LVclZx+oC6sN3HNnjTGSfitDgWzl0JIbI=",
     "homepage": "https://registry.terraform.io/providers/jianyuan/sentry",

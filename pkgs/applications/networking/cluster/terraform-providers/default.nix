@@ -2,6 +2,7 @@
   lib,
   stdenv,
   buildGoModule,
+  buildGo127Module,
   fetchFromGitHub,
   fetchFromGitLab,
   callPackage,
@@ -117,6 +118,9 @@ let
             CGO_ENABLED = "1";
           };
         });
+    jianyuan_porkbun = automated-providers.jianyuan_porkbun.override {
+      mkProviderGoModule = buildGo127Module;
+    };
   };
 
   # Put all the providers we not longer support in this list.
